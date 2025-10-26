@@ -42,9 +42,7 @@ df_processed = df.copy()
 df_processed[['Deck', 'CabinNum', 'Side']] = df_processed['Cabin'].str.split('/', expand=True)
 df_processed.drop('Cabin', axis=1, inplace=True)
 
-# !!! ИСПРАВЛЕНИЕ: Сначала заполняем пропущенные значения в категориальных и булевых признаках !!!
-# Обработка пропущенных значений для категориальных и булевых признаков (стратегия: мода)
-# Проходимся по столбцам, которые должны быть категориальными/булевыми
+
 for col in ['HomePlanet', 'Destination', 'Deck', 'Side', 'CryoSleep', 'VIP']:
     if col in df_processed.columns: # Убедимся, что столбец существует
         # Для булевых (True/False/NaN) и категориальных (строк) мода - хороший выбор.
@@ -180,12 +178,6 @@ grid_search_reg.fit(X_reg_train, y_reg_train)
 best_reg_model = grid_search_reg.best_estimator_
 y_reg_pred_tuned = best_reg_model.predict(X_reg_test)
 
-#print(f"Лучшие параметры для регрессии: {grid_search_reg.best_params_}")
-#print("\nОценка улучшенной регрессионной модели (Полиномиальная регрессия с Ridge):")
-#print(f"MAE: {mean_absolute_error(y_reg_test, y_reg_pred_tuned):.2f}")
-#print(f"MSE: {mean_squared_error(y_reg_test, y_reg_pred_tuned):.2f}")
-#print(f"RMSE: {np.sqrt(mean_squared_error(y_reg_test, y_reg_pred_tuned)):.2f}")
-#print(f"R2: {r2_score(y_reg_test, y_reg_pred_tuned):.2f}")
 
 # Визуализация результатов регрессии (для одного признака, если возможно)
 # Для многомерных данных сложно визуализировать
@@ -249,22 +241,4 @@ grid_search_clf.fit(X_clf_train, y_clf_train)
 best_clf_model = grid_search_clf.best_estimator_
 y_clf_pred_tuned = best_clf_model.predict(X_clf_test)
 
-#print(f"Лучшие параметры для классификации: {grid_search_clf.best_params_}")
-#print("\nОценка улучшенной классификационной модели (Логистическая регрессия с тюнингом):")
-#print(f"Accuracy: {accuracy_score(y_clf_test, y_clf_pred_tuned):.2f}")
-#print("\nМатрица ошибок:")
-#cm_tuned = confusion_matrix(y_clf_test, y_clf_pred_tuned)
-#print(cm_tuned)
-#print("\nОтчет по классификации:")
-#print(classification_report(y_clf_test, y_clf_pred_tuned))
-
-# Визуализация улучшенной матрицы ошибок
-#plt.figure(figsize=(6, 5))
-#sns.heatmap(cm_tuned, annot=True, fmt='d', cmap='Blues', cbar=False,
-#            xticklabels=['Не Transported (0)', 'Transported (1)'],
-        #    yticklabels=['Не Transported (0)', 'Transported (1)'])
-#plt.title('Матрица ошибок (Улучшенная Логистическая регрессия)')
-#plt.xlabel('Предсказанный класс')
-#plt.ylabel('Истинный класс')
-#plt.show()
 
