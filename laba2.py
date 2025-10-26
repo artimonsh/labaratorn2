@@ -159,7 +159,7 @@ print(f"RMSE: {np.sqrt(mean_squared_error(y_reg_test, y_reg_pred)):.2f}")
 print(f"R2: {r2_score(y_reg_test, y_reg_pred):.2f}")
 
 # --- Улучшение регрессионной модели: Полиномиальная регрессия с регуляризацией Ridge ---
-print("\n--- Улучшение регрессионной модели: Полиномиальная регрессия с Ridge ---")
+#print("\n--- Улучшение регрессионной модели: Полиномиальная регрессия с Ridge ---")
 
 # Добавим PolynomialFeatures в пайплайн
 poly_reg_pipeline = Pipeline(steps=[('preprocessor', preprocessor_reg),
@@ -180,12 +180,12 @@ grid_search_reg.fit(X_reg_train, y_reg_train)
 best_reg_model = grid_search_reg.best_estimator_
 y_reg_pred_tuned = best_reg_model.predict(X_reg_test)
 
-print(f"Лучшие параметры для регрессии: {grid_search_reg.best_params_}")
-print("\nОценка улучшенной регрессионной модели (Полиномиальная регрессия с Ridge):")
-print(f"MAE: {mean_absolute_error(y_reg_test, y_reg_pred_tuned):.2f}")
-print(f"MSE: {mean_squared_error(y_reg_test, y_reg_pred_tuned):.2f}")
-print(f"RMSE: {np.sqrt(mean_squared_error(y_reg_test, y_reg_pred_tuned)):.2f}")
-print(f"R2: {r2_score(y_reg_test, y_reg_pred_tuned):.2f}")
+#print(f"Лучшие параметры для регрессии: {grid_search_reg.best_params_}")
+#print("\nОценка улучшенной регрессионной модели (Полиномиальная регрессия с Ridge):")
+#print(f"MAE: {mean_absolute_error(y_reg_test, y_reg_pred_tuned):.2f}")
+#print(f"MSE: {mean_squared_error(y_reg_test, y_reg_pred_tuned):.2f}")
+#print(f"RMSE: {np.sqrt(mean_squared_error(y_reg_test, y_reg_pred_tuned)):.2f}")
+#print(f"R2: {r2_score(y_reg_test, y_reg_pred_tuned):.2f}")
 
 # Визуализация результатов регрессии (для одного признака, если возможно)
 # Для многомерных данных сложно визуализировать
@@ -209,7 +209,7 @@ clf_pipeline = Pipeline(steps=[('preprocessor', preprocessor),
 clf_pipeline.fit(X_clf_train, y_clf_train)
 y_clf_pred = clf_pipeline.predict(X_clf_test)
 
-print("\nОценка простой Логистической регрессии:")
+print("\nОценка :")
 print(f"Accuracy: {accuracy_score(y_clf_test, y_clf_pred):.2f}")
 print("\nМатрица ошибок:")
 cm = confusion_matrix(y_clf_test, y_clf_pred)
@@ -229,7 +229,7 @@ plt.show()
 
 
 # --- Улучшение классификационной модели: Логистическая регрессия с подбором гиперпараметров ---
-print("\n--- Улучшение классификационной модели: Логистическая регрессия с подбором гиперпараметров ---")
+#print("\n--- Улучшение классификационной модели: Логистическая регрессия с подбором гиперпараметров ---")
 
 # Подбор гиперпараметров для LogisticRegression (C, penalty, solver)
 param_grid_clf = {
@@ -249,36 +249,22 @@ grid_search_clf.fit(X_clf_train, y_clf_train)
 best_clf_model = grid_search_clf.best_estimator_
 y_clf_pred_tuned = best_clf_model.predict(X_clf_test)
 
-print(f"Лучшие параметры для классификации: {grid_search_clf.best_params_}")
-print("\nОценка улучшенной классификационной модели (Логистическая регрессия с тюнингом):")
-print(f"Accuracy: {accuracy_score(y_clf_test, y_clf_pred_tuned):.2f}")
-print("\nМатрица ошибок:")
-cm_tuned = confusion_matrix(y_clf_test, y_clf_pred_tuned)
-print(cm_tuned)
-print("\nОтчет по классификации:")
-print(classification_report(y_clf_test, y_clf_pred_tuned))
+#print(f"Лучшие параметры для классификации: {grid_search_clf.best_params_}")
+#print("\nОценка улучшенной классификационной модели (Логистическая регрессия с тюнингом):")
+#print(f"Accuracy: {accuracy_score(y_clf_test, y_clf_pred_tuned):.2f}")
+#print("\nМатрица ошибок:")
+#cm_tuned = confusion_matrix(y_clf_test, y_clf_pred_tuned)
+#print(cm_tuned)
+#print("\nОтчет по классификации:")
+#print(classification_report(y_clf_test, y_clf_pred_tuned))
 
 # Визуализация улучшенной матрицы ошибок
-plt.figure(figsize=(6, 5))
-sns.heatmap(cm_tuned, annot=True, fmt='d', cmap='Blues', cbar=False,
-            xticklabels=['Не Transported (0)', 'Transported (1)'],
-            yticklabels=['Не Transported (0)', 'Transported (1)'])
-plt.title('Матрица ошибок (Улучшенная Логистическая регрессия)')
-plt.xlabel('Предсказанный класс')
-plt.ylabel('Истинный класс')
-plt.show()
+#plt.figure(figsize=(6, 5))
+#sns.heatmap(cm_tuned, annot=True, fmt='d', cmap='Blues', cbar=False,
+#            xticklabels=['Не Transported (0)', 'Transported (1)'],
+        #    yticklabels=['Не Transported (0)', 'Transported (1)'])
+#plt.title('Матрица ошибок (Улучшенная Логистическая регрессия)')
+#plt.xlabel('Предсказанный класс')
+#plt.ylabel('Истинный класс')
+#plt.show()
 
-print("\n--- Задания 2 и 3 выполнены. ---")
-print("--- Задания 4 и 5 выполнены. ---")
-print("--- Задание 1 также было выполнено в начале. ---")
-
-
-# --- 6. Задание 6: Выгрузка результатов на GitHub ---
-print("\n--- 6. Задание 6: Выгрузка результатов на GitHub ---")
-print("Создайте репозиторий на GitHub. Сохраните этот скрипт, данные 'train.csv', и создайте README.md и requirements.txt.")
-print("Пример содержимого requirements.txt:")
-print("pandas")
-print("numpy")
-print("scikit-learn")
-print("matplotlib")
-print("seaborn")
